@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "node db.mongodb.js",
+    "api": "node src/api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +15,7 @@
   "packageManager": "pnpm@10.13.1",
   "dependencies": {
     "express": "^5.1.0",
-    "mongoose": "^8.18.1"
+    "mongoose": "^8.18.1",
+    "path": "^0.12.7"
   }
 }
