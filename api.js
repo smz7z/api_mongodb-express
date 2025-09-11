@@ -1,11 +1,11 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
+const prompt = require('prompt-sync')();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const mongoose = require('mongoose');
-const prompt = require('prompt-sync')();
 
 // Conexión a MongoDB
 mongoose.connect(`mongodb+srv://root:1234@cluster0.fgumghx.mongodb.net/colegio`)
@@ -22,12 +22,12 @@ const Alumno = mongoose.model('Alumno', {
 
 // Prompts el nuevo alumno
 /*---------------------------------------------------------------*/
-const nombre = prompt("Ingrese el nombre del alumno: ")
-const edad = parseInt(prompt("Ingrese la edad del alumno: "))
+//const nombre = prompt("Ingrese el nombre del alumno: ")
+//const edad = parseInt(prompt("Ingrese la edad del alumno: "))
 
 
 app.get('/', async (req, res) => {
-    res.sendFile(path.join('c:/Users/santi/Desktop/API mongo-js-astro/pages/index.html'));
+    res.sendFile(path.join(__dirname + '/pages/index.html'));
 });
 
 app.get('/crear', async (req, res) => {

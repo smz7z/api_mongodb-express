@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "node db.mongodb.js",
-    "api": "node src/api.js",
+    "api": "node api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
