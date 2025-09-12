@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const prompt = require('prompt-sync')();
-require('dotenv').config({ path: 'private.env' });
+require('dotenv').config();
 
 const mongoUser = process.env.MONGO_CLUSTER_NAME;
 const mongoPassword = process.env.MONGO_CLUSTER_PASSWORD;
