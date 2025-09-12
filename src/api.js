@@ -5,15 +5,18 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
 const prompt = require('prompt-sync')();
+/**--------------------------------------------------------- */
 
 // Variables de entorno
 const mongoUser = process.env.MONGO_CLUSTER_NAME;
 const mongoPassword = process.env.MONGO_CLUSTER_PASSWORD;
 const PORT = process.env.PORT || 3000;
+/**--------------------------------------------------------- */
 
 // Variables de configuración
 const database = "hotel";
 const collection = "empleados";
+/**--------------------------------------------------------- */
 
 // Conexión a Servidor & MongoDB
 mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.mongodb.net/${database}`)
@@ -24,6 +27,7 @@ mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.m
         }
         ))
     .catch(err => console.log(`Error de conexión a MongoDB: ${err}`))
+/**--------------------------------------------------------- */
 
 // Definición de equema & modelo
 const empleadoSchema = new mongoose.Schema(
@@ -31,6 +35,7 @@ const empleadoSchema = new mongoose.Schema(
     { versionKey: false });
 
 const Empleado = mongoose.model(collection, empleadoSchema);
+/**--------------------------------------------------------- */
 
 // Endpoints
 app.get('/', async (req, res) => {
@@ -48,4 +53,4 @@ app.get('/crear', async (req, res) => {
     res.send('Empleado creado');
     console.log('Empleado creado')
 });
-
+/**--------------------------------------------------------- */
