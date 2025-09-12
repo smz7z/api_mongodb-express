@@ -11,8 +11,8 @@ En proceso. Implementando endpoints básicos y conexión a la base de datos.
 - **MongoDB Atlas**: Alojamiento en la nube
 
 ## Instalación
-1. Clona el repositorio: `git clone https://github.com/smz7z/api_mongodb-express`
-2. Instala dependencias: `pnpm install`
+1. Clona el repositorio: ```git clone https://github.com/smz7z/api_mongodb-express```
+2. Instala dependencias: ```pnpm install```
 3. Crea un archivo `.env` con:
    ```plaintext
    MONGO_CLUSTER_NAME=tu_cadena_de_conexión_atlas
