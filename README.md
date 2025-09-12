@@ -18,3 +18,8 @@ En proceso. Implementando endpoints básicos y conexión a la base de datos.
    MONGO_CLUSTER_NAME=tu_cadena_de_conexión_atlas
    MONGO_CLUSTER_PASSWORD=tu_password_de_conexión_atlas
    PORT=3000
+
+## Posibles errores de conexión con Mongo
+Si tu DNS activo es el del propio router local, el registro SRV puede dar error, debido a que en ocasiones el DNS local no lo soporta.
+
+**Recomendación**: Modificar DNS a 8.8.8.8 (Google) o 1.1.1.1 (Cloudflare)
