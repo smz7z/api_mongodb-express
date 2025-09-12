@@ -21,11 +21,11 @@ En proceso. Implementando endpoints básicos y conexión a la base de datos.
 
 ## Posibles errores de conexión con Mongodb
 
-### DNS
+1. DNS
 Si tu DNS activo es el del propio router local, el registro SRV puede dar error, debido a que en ocasiones el DNS local no lo soporta.
 
 **Recomendación**: Modificar DNS a 8.8.8.8 (Google) o 1.1.1.1 (Cloudflare)
 
-### Configuración incorrecta de la URI
+2. Configuración incorrecta de la URI
 
-### Problemas de firewall con el puerto 27017 (propio de Mongodb)
+3. ### Problemas de firewall con el puerto 27017 (propio de Mongodb)
