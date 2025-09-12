@@ -1,18 +1,18 @@
+// Importaciones
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-// const prompt = require('prompt-sync')();
 require('dotenv').config();
+const app = express();
 
+// Variables de entorno
 const mongoUser = process.env.MONGO_CLUSTER_NAME;
 const mongoPassword = process.env.MONGO_CLUSTER_PASSWORD;
-
-const app = express();
 const PORT = process.env.PORT || 3000;
 
-
-// Conexión a MongoDB
-mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.mongodb.net/colegio`)
+// Conexión a Servidor & MongoDB
+const database = "hotel";
+mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.mongodb.net/${database}`)
     .then(
         app.listen(PORT, () => {
             console.clear()
@@ -22,28 +22,31 @@ mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.m
     .catch(err => console.log(`Error de conexión a MongoDB: ${err}`))
 
 
-// Definición del modelo
-const Alumno = mongoose.model('Alumno', {
-    nombre: String,
-    edad: Number
-});
+// Definición de equema & modelo
+const collection = "empleados";
+const nombreEmpleado = "joselito";
+const edadEmpleado = 37;
+
+const empleadoSchema = new mongoose.Schema(
+    { nombre: String, edad: Number },
+    { versionKey: false });
+
+const Empleado = mongoose.model(collection, empleadoSchema);
 
 
-// Prompts el nuevo alumno
-/*---------------------------------------------------------------*/
-//const nombre = prompt("Ingrese el nombre del alumno: ")
-//const edad = parseInt(prompt("Ingrese la edad del alumno: "))
 
-
+// Endpoints
 app.get('/', async (req, res) => {
     res.sendFile(path.join(__dirname, "..", 'index.html'));
+    console.log('Index enviado')
 });
 
 app.get('/crear', async (req, res) => {
-    await Alumno.insertOne({
-        nombre: "josito",
-        edad: 1
+    await Empleado.insertOne({
+        nombre: nombreEmpleado,
+        edad: edadEmpleado
     });
-    res.send('Alumno creado');
+    res.send('Empleado creado');
+    console.log('Empleado creado')
 });
 
