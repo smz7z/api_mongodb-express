@@ -2,13 +2,17 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const prompt = require('prompt-sync')();
+require('dotenv').config({ path: 'private.env' });
+
+const mongoUser = process.env.MONGO_CLUSTER_NAME;
+const mongoPassword = process.env.MONGO_CLUSTER_PASSWORD;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 
 // Conexión a MongoDB
-mongoose.connect(`mongodb+srv://root:1234@cluster0.fgumghx.mongodb.net/colegio`)
+mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.mongodb.net/colegio`)
     .then(() => console.log("Conectado a MongoDB"))
     .catch(err => console.log(`Error de conexión a MongoDB: ${err}`))
 
@@ -32,8 +36,8 @@ app.get('/', async (req, res) => {
 
 app.get('/crear', async (req, res) => {
     await Alumno.insertOne({
-        nombre: nombre,
-        edad: edad
+        nombre: "josito",
+        edad: 1
     });
     res.send('Alumno creado');
 });
