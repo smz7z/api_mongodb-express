@@ -4,14 +4,18 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
+const prompt = require('prompt-sync')();
 
 // Variables de entorno
 const mongoUser = process.env.MONGO_CLUSTER_NAME;
 const mongoPassword = process.env.MONGO_CLUSTER_PASSWORD;
 const PORT = process.env.PORT || 3000;
 
-// Conexión a Servidor & MongoDB
+// Variables de configuración
 const database = "hotel";
+const collection = "empleados";
+
+// Conexión a Servidor & MongoDB
 mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.mongodb.net/${database}`)
     .then(
         app.listen(PORT, () => {
@@ -21,19 +25,12 @@ mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.m
         ))
     .catch(err => console.log(`Error de conexión a MongoDB: ${err}`))
 
-
 // Definición de equema & modelo
-const collection = "empleados";
-const nombreEmpleado = "joselito";
-const edadEmpleado = 37;
-
 const empleadoSchema = new mongoose.Schema(
     { nombre: String, edad: Number },
     { versionKey: false });
 
 const Empleado = mongoose.model(collection, empleadoSchema);
-
-
 
 // Endpoints
 app.get('/', async (req, res) => {
@@ -42,6 +39,8 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/crear', async (req, res) => {
+    const nombreEmpleado = prompt('Ingrese el nombre del empleado: ');
+    const edadEmpleado = parseInt(prompt('Ingrese la edad del empleado: '));
     await Empleado.insertOne({
         nombre: nombreEmpleado,
         edad: edadEmpleado
