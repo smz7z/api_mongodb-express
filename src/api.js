@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const prompt = require('prompt-sync')();
+// const prompt = require('prompt-sync')();
 require('dotenv').config();
 
 const mongoUser = process.env.MONGO_CLUSTER_NAME;
@@ -13,7 +13,12 @@ const PORT = process.env.PORT || 3000;
 
 // Conexión a MongoDB
 mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.mongodb.net/colegio`)
-    .then(() => console.log("Conectado a MongoDB"))
+    .then(
+        app.listen(PORT, () => {
+            console.clear()
+            console.log(`Server & Mongo are running at http://localhost:${PORT}`);
+        }
+        ))
     .catch(err => console.log(`Error de conexión a MongoDB: ${err}`))
 
 
@@ -42,6 +47,3 @@ app.get('/crear', async (req, res) => {
     res.send('Alumno creado');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
