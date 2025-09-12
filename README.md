@@ -20,11 +20,11 @@ git clone https://github.com/smz7z/api_mongodb-express
 pnpm install
 ```
 3. Crea un archivo `.env` con:
-   ```plaintext
-   MONGO_CLUSTER_NAME=tu_cadena_de_conexión_atlas
-   MONGO_CLUSTER_PASSWORD=tu_password_de_conexión_atlas
-   PORT=3000
-   ```
+```
+MONGO_CLUSTER_NAME=tu_cadena_de_conexión_atlas
+MONGO_CLUSTER_PASSWORD=tu_password_de_conexión_atlas
+PORT=3000
+```
 
 ## Posibles errores de conexión con Mongodb
 
