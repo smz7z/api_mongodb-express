@@ -18,6 +18,7 @@ En proceso. Implementando endpoints básicos y conexión a la base de datos.
    MONGO_CLUSTER_NAME=tu_cadena_de_conexión_atlas
    MONGO_CLUSTER_PASSWORD=tu_password_de_conexión_atlas
    PORT=3000
+   ```
 
 ## Posibles errores de conexión con Mongodb
 
