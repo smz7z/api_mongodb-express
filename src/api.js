@@ -1,11 +1,18 @@
-const mongoose = require('mongoose')
 const express = require('express');
-const app = express();
-const PORT = 3000;
+const path = require('path');
+const mongoose = require('mongoose');
 const prompt = require('prompt-sync')();
+require('dotenv').config();
+
+const mongoUser = process.env.MONGO_CLUSTER_NAME;
+const mongoPassword = process.env.MONGO_CLUSTER_PASSWORD;
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 
 // Conexión a MongoDB
-mongoose.connect(`mongodb+srv://root:1234@cluster0.fgumghx.mongodb.net/colegio`)
+mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.mongodb.net/colegio`)
     .then(() => console.log("Conectado a MongoDB"))
     .catch(err => console.log(`Error de conexión a MongoDB: ${err}`))
 
@@ -19,21 +26,18 @@ const Alumno = mongoose.model('Alumno', {
 
 // Prompts el nuevo alumno
 /*---------------------------------------------------------------*/
-const nombre = prompt("Ingrese el nombre del alumno: ")
-const edad = parseInt(prompt("Ingrese la edad del alumno: "))
-/*---------------------------------------------------------------*/
+//const nombre = prompt("Ingrese el nombre del alumno: ")
+//const edad = parseInt(prompt("Ingrese la edad del alumno: "))
 
 
-// Endpoints
-/*---------------------------------------------------------------*/
 app.get('/', async (req, res) => {
-    res.send('Menú principal');
+    res.sendFile(path.join(__dirname, "..", 'index.html'));
 });
 
 app.get('/crear', async (req, res) => {
     await Alumno.insertOne({
-        nombre: nombre,
-        edad: edad
+        nombre: "josito",
+        edad: 1
     });
     res.send('Alumno creado');
 });
@@ -41,4 +45,3 @@ app.get('/crear', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-/*---------------------------------------------------------------*/
