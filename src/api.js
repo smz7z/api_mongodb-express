@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
 const prompt = require('prompt-sync')();
+const { nombre, edad } = "./index.html";
 /**--------------------------------------------------------- */
 
 // Variables de entorno
@@ -43,14 +44,14 @@ app.get('/', async (req, res) => {
     console.log('Index enviado')
 });
 
-app.get('/crear', async (req, res) => {
-    const nombreEmpleado = prompt('Ingrese el nombre del empleado: ');
-    const edadEmpleado = parseInt(prompt('Ingrese la edad del empleado: '));
+
+app.get('/empleadoCreado', async (req, res) => {
     await Empleado.insertOne({
-        nombre: nombreEmpleado,
-        edad: edadEmpleado
+        nombre: nombre,
+        edad: edad
     });
-    res.send('Empleado creado');
+    res.sendFile(path.join(__dirname, "..", 'index.html'));
     console.log('Empleado creado')
 });
+
 /**--------------------------------------------------------- */

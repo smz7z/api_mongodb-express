@@ -18,10 +18,18 @@
 			<input id="edad" type="text" />
 		</section>
 
-		<button class="bg-green-700">Crear</button>
+		<button id="botonCrear" onclick="location.href='http://localhost:3000/empleadoCreado'"" class="
+			bg-green-700">Crear</button>
 	</div>
 
 </body>
+
+<script src="./src/api.js">
+	const nombre = document.getElementById('nombre').innerHTML;
+	const edad = document.getElementById('edad').innerText;
+	module.export = { nombre, edad }
+</script>
+
 <style>
 	#div_principal {
 		display: flex;
