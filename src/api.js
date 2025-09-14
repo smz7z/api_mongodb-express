@@ -22,7 +22,7 @@ mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.m
     .then(
         app.listen(PORT, () => {
             console.clear()
-            console.log(`Server & Mongo are running at http://localhost:${PORT}`);
+            console.log(`Server & Mongo corriendo en http://localhost:${PORT}`);
         }
         ))
     .catch(err => console.log(`Error de conexión a MongoDB: ${err}`))
@@ -36,7 +36,7 @@ const usuarioSchema = new mongoose.Schema(
 const Usuario = mongoose.model(collection, usuarioSchema);
 /**--------------------------------------------------------- */
 
-// Middleware para parsear datos de formularios
+// Middleware para parsear datos de formularios (nombre y edad del index)
 app.use(express.urlencoded({ extended: true }));
 
 // Endpoints
@@ -50,7 +50,6 @@ app.post('/usuarioCreado', async (req, res) => {
     try {
         const { nombre, edad } = req.body;
 
-        // Crear un nuevo empleado usando Mongoose
         await Usuario.create({
             nombre: nombre,
             edad: edad
