@@ -4,8 +4,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
-const prompt = require('prompt-sync')();
-const { nombre, edad } = "./index.html";
 /**--------------------------------------------------------- */
 
 // Variables de entorno
@@ -15,8 +13,8 @@ const PORT = process.env.PORT || 3000;
 /**--------------------------------------------------------- */
 
 // Variables de configuración
-const database = "hotel";
-const collection = "empleados";
+const database = "redSocial";
+const collection = "usuarios";
 /**--------------------------------------------------------- */
 
 // Conexión a Servidor & MongoDB
@@ -31,12 +29,15 @@ mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPassword}@cluster0.fgumghx.m
 /**--------------------------------------------------------- */
 
 // Definición de equema & modelo
-const empleadoSchema = new mongoose.Schema(
+const usuarioSchema = new mongoose.Schema(
     { nombre: String, edad: Number },
     { versionKey: false });
 
-const Empleado = mongoose.model(collection, empleadoSchema);
+const Usuario = mongoose.model(collection, usuarioSchema);
 /**--------------------------------------------------------- */
+
+// Middleware para parsear datos de formularios
+app.use(express.urlencoded({ extended: true }));
 
 // Endpoints
 app.get('/', async (req, res) => {
@@ -45,13 +46,23 @@ app.get('/', async (req, res) => {
 });
 
 
-app.get('/empleadoCreado', async (req, res) => {
-    await Empleado.insertOne({
-        nombre: nombre,
-        edad: edad
-    });
-    res.sendFile(path.join(__dirname, "..", 'index.html'));
-    console.log('Empleado creado')
+app.post('/usuarioCreado', async (req, res) => {
+    try {
+        const { nombre, edad } = req.body;
+
+        // Crear un nuevo empleado usando Mongoose
+        await Usuario.create({
+            nombre: nombre,
+            edad: edad
+        });
+
+        res.sendFile(path.join(__dirname, "..", 'index.html'));
+        console.log('Usuario creado');
+
+    } catch (error) {
+        res.status(500).send('Error al crear el usuario');
+        console.error('Error al crear usuario:', error);
+    }
 });
 
 /**--------------------------------------------------------- */

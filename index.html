@@ -4,31 +4,24 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Click to create</title>
+	<title>Añadir empleado</title>
 </head>
 
 <body>
 	<div id="div_principal">
-		<section>
-			<p>Introduce el nombre del alumno</p>
-			<input id="nombre" type="text" />
-		</section>
-		<section>
-			<p>Introduce la edad del alumno</p>
-			<input id="edad" type="text" />
-		</section>
+		<form action="/usuarioCreado" method="POST">
+			<p>Introduce un nombre: </p>
+			<input id="nombre" name="nombre" type="text" required />
 
-		<button id="botonCrear" onclick="location.href='http://localhost:3000/empleadoCreado'"" class="
-			bg-green-700">Crear</button>
+			<p>Introduce una edad: </p>
+			<input id="edad" name="edad" type="number" required />
+			<button id="botonCrear" type="submit">Crear</button>
+		</form>
+
 	</div>
 
-</body>
 
-<script src="./src/api.js">
-	const nombre = document.getElementById('nombre').innerHTML;
-	const edad = document.getElementById('edad').innerText;
-	module.export = { nombre, edad }
-</script>
+</body>
 
 <style>
 	#div_principal {
@@ -38,11 +31,6 @@
 		align-items: center;
 		height: 30dvh;
 		gap: 10%;
-	}
-
-	section {
-		background-color: yellow;
-		width: fit-content;
 	}
 
 	p {
