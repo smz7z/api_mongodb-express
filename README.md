@@ -3,7 +3,7 @@
 API REST en desarrollo, construida con **Express.js**, conectada a **MongoDB** mediante **Mongoose** y alojada en **MongoDB Atlas**.
 
 ## Estado
-En proceso. Implementando endpoints básicos y conexión a la base de datos.
+En funcionamiento
 
 ## Tecnologías
 - **Node.js** + **Express.js**: Framework backend
